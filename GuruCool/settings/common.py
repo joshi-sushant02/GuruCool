@@ -28,7 +28,10 @@ STATICFILES_DIRS = [
 # look for templates here
 # This is an internal setting, used in the TEMPLATES directive
 PROJECT_TEMPLATES = [
-    join(PROJECT_ROOT, 'templates'),
+    join(PROJECT_ROOT, 'templates/core'),
+    join(PROJECT_ROOT, 'templates/auth'),
+    join(PROJECT_ROOT, 'templates/home'),
+    join(PROJECT_ROOT, 'templates/admin'),
 ]
 
 # add apps/ to the Python path
@@ -39,6 +42,7 @@ sys.path.append(normpath(join(PROJECT_ROOT, 'apps')))
 
 # these are the apps
 DEFAULT_APPS = [
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -86,7 +90,9 @@ USE_I18N = False
 
 # We store the secret key here
 # The required SECRET_KEY is fetched at the end of this file
-SECRET_FILE = normpath(join(PROJECT_ROOT, 'run', 'SECRET.key'))
+# SECRET_FILE = normpath(join(PROJECT_ROOT, 'run', 'SECRET.key'))
+
+SECRET_KEY = 'django-insecure-73r(yn_q1y2osaguv+vv&=i@00=-4=%9d17l3%&fgu#1yvo%-l'
 
 # these persons receive error notification
 ADMINS = (
@@ -102,6 +108,8 @@ WSGI_APPLICATION = '%s.wsgi.application' % SITE_NAME
 
 # the root URL configuration
 ROOT_URLCONF = '%s.urls' % SITE_NAME
+# ROOT_URLCONF = 'GuruCool.urls'
+
 
 # the URL for static files
 STATIC_URL = '/static/'
@@ -115,14 +123,14 @@ DEBUG = False
 
 
 # finally grab the SECRET KEY
-try:
-    SECRET_KEY = open(SECRET_FILE).read().strip()
-except IOError:
-    try:
-        from django.utils.crypto import get_random_string
-        chars = 'abcdefghijklmnopqrstuvwxyz0123456789!$%&()=+-_'
-        SECRET_KEY = get_random_string(50, chars)
-        with open(SECRET_FILE, 'w') as f:
-            f.write(SECRET_KEY)
-    except IOError:
-        raise Exception('Could not open %s for writing!' % SECRET_FILE)
+# try:
+#     SECRET_KEY = open(SECRET_FILE).read().strip()
+# except IOError:
+#     try:
+#         from django.utils.crypto import get_random_string
+#         chars = 'abcdefghijklmnopqrstuvwxyz0123456789!$%&()=+-_'
+#         SECRET_KEY = get_random_string(50, chars)
+#         with open(SECRET_FILE, 'w') as f:
+#             f.write(SECRET_KEY)
+#     except IOError:
+#         raise Exception('Could not open %s for writing!' % SECRET_FILE)

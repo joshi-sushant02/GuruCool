@@ -1,6 +1,7 @@
 # Python imports
 from os.path import join
-
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent
 # project imports
 from .common import *
 
@@ -23,8 +24,8 @@ LOGOUT_REDIRECT_URL = 'core_login'
 # ##### DATABASE CONFIGURATION ############################
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': join(PROJECT_ROOT, 'run', 'dev.sqlite3'),
+         'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
