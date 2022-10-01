@@ -1,0 +1,398 @@
+{% extends 'assignment_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% block title %} Assignment-Create {% endblock title %}
+
+{% block content %}
+<style>
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  align-items: center;
+  background: #96d8d0;
+  color: rgba(0, 0, 0, 0.8);
+  display: grid;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  height: 100vh;
+  justify-items: center;
+  weight: 100vw;
+}
+
+.signup-container {
+  display: grid;
+  grid-template-areas: "left right";
+  max-width: 1200px;
+}
+
+.left-container {
+  background: #717f82;
+  overflow: hidden;
+  padding: 40px 0 0 0;
+  position: relative;
+  text-align: center;
+  width: 300px;
+}
+.left-container h1 {
+  color: rgba(0, 0, 0, 0.8);
+  display: inline-block;
+  font-size: 24px;
+}
+.left-container h1 i {
+  background: #abf7df;
+  border-radius: 50%;
+  color: #807182;
+  font-size: 24px;
+  margin-right: 5px;
+  padding: 10px;
+  transform: rotate(-45deg);
+}
+.left-container .puppy {
+  bottom: -5px;
+  position: absolute;
+  text-align: center;
+}
+.left-container .puppy:before {
+  background: #71827f;
+  content: "";
+  height: 100%;
+  left: 0;
+  opacity: 0.4;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+.left-container img {
+  filter: sepia(100%);
+  width: 70%;
+}
+
+.right-container {
+  background: #c2f9ee;
+  display: grid;
+  grid-template-areas: "." ".";
+  width: 500px;
+}
+.right-container h1:nth-of-type(1) {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 28px;
+  font-weight: 600;
+}
+.right-container .set {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+.right-container input {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  height: 38px;
+  line-height: 38px;
+  padding-left: 5px;
+}
+.right-container input, .right-container label {
+  color: rgba(0, 0, 0, 0.8);
+}
+.right-container header {
+  padding: 40px;
+}
+.right-container label, .right-container input, .right-container .pets-photo {
+  width: 176px;
+}
+.right-container .pets-photo {
+  align-items: center;
+  display: grid;
+  grid-template-areas: ". .";
+}
+.right-container .pets-photo button {
+  border: none;
+  border-radius: 50%;
+  height: 38px;
+  margin-right: 10px;
+  outline: none;
+  width: 38px;
+}
+.right-container .pets-photo button i {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 16px;
+}
+.right-container .pets-weight .radio-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.left-container footer {
+  margin-top: 400px;
+  align-items: center;
+  background: #fff;
+  display: grid;
+  padding: 5px 40px;
+}
+.left-container footer button {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  height: 38px;
+  line-height: 38px;
+  width: 100px;
+  border-radius: 19px;
+  font-family: "Montserrat", sans-serif;
+}
+.left-container footer #back {
+  background: #fff;
+  transition: 0.2s all ease-in-out;
+}
+.left-container footer #back:hover {
+  background: #171A2B;
+  color: white;
+}
+.left-container footer #next {
+  background: #807182;
+  border: 1px solid transparent;
+  color: #fff;
+}
+.left-container footer #next:hover {
+  background: #171A2B;
+}
+
+.pets-name label, .pets-breed label, .pets-birthday label, .pets-gender label, .pets-spayed-neutered label, .pets-weight label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.radio-container {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+ 
+  padding: 5px;
+}
+
+.radio-container label {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  display: inline-block;
+  height: 26px;
+  line-height: 26px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  transition: 0.2s all ease-in-out;
+  width: 80px;
+}
+
+.radio-container input[type=radio] {
+  display: none;
+}
+
+.radio-container input[type=radio]:checked + label {
+  background: #abf7e2;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.radio-container input[type=file]{
+  background: #abf7e2;
+  width: auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+</style>
+
+<form  method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+  <div class='signup-container'>
+      <div class='left-container'>
+        <div style="height:60px ;">
+        <h1>
+            Created by:-</h1>
+            <h4 style="font-weight: bold">{{ request.user.username }}</h4>
+        
+    </div>
+        <hr style="background-color: black;"class="sidebar-divider">
+
+     <footer>
+          <div class='set'>
+           <button id="back"><a href="{% url 'classroom:home' %}">Back</a></button>
+            <button id='next' type="submit">Done!</button>
+          </div>
+        </footer>  
+    </div>
+      
+      <div class='right-container'>
+        <header>
+          <h1>Hey Teachers!
+            Create Your Assignments Here...</h1>
+          <div class='set'>
+            
+            <div class='pets-breed'>
+              <label  >Name</label>
+              {{ form.title|attr:"class:form-control" }}
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                {{ form.description|attr:"class:form-control" }}
+            </div>
+          </div>
+          <div class='set'>
+            <div class='pets-gender'>
+              <label  >For</label>
+              <div class='radio-container'>
+                {{ form.classrooms|attr:"class:form-control" }}
+            </div>
+            </div>
+            <div class='pets-gender'>
+              <label  >Topic</label>
+              <div class='radio-container'>
+                {{ form.topics|attr:"class:form-control" }}
+               
+            </div>
+            
+        </div>
+            
+          </div>
+          <div class='set'>
+            <div class='pets-birthday'>
+              <label >Created On</label>
+              <input id='pets-birthday'name ="created"  type='text' readonly="true">
+              <script> document.getElementById("pets-birthday").defaultValue = new Date().toDateString(); </script>
+  
+            </div>
+            <div class='pets-birthday'>
+              <label >Due Date</label>
+              {{ form.due_date|attr:"class:form-control"|attr:"type:datetime-local" }}
+              </div>
+          </div>
+
+          <div class='set'>
+            <div class='pets-gender'>
+              <label  >Upload file</label>
+              <div class='radio-container'>
+                {{ form.file_field }}</div>
+            </div>
+            
+          </div>
+          <div class='pets-weight'>
+            <label for='pet-weight-0-25'>Points</label>
+            <div class='radio-container'>
+              <input checked="true" id='pet-weight-25-50' name='points' type='radio' value=10>
+              <label for='pet-weight-25-50'>10 Points</label>
+              <input id='pet-weight-0-25' name='points' type='radio' value=15>
+              <label for='pet-weight-0-25'>15 Points</label>
+              <input id='pet-weight-50-100' name='points' type='radio' value=20>
+              <label for='pet-weight-50-100'>20 Points</label>
+              <input id='pet-weight-100-plus'name='points' type='radio' value=25>
+              <label for='pet-weight-100-plus'>25 Points</label>
+            </div>
+          </div>
+        </header>
+       
+      </div>
+    </div>
+    </form>
+
+
+{% endblock content %}
+
+
+
+
+
+<form action ="{% url 'classroom:assignment_create' %}" method="POST" enctype='multipart/form-data'>
+    {% csrf_token %}
+    <!-- <nav class="navbar navbar-light bg-light">
+        <div class="navbar-brand">
+            <a href="{% url 'classroom:home' %}"><i class="fas fa-times"></i></a>
+            <div class="pl-3 float-right">Assignment</div>
+        </div>
+        <div class="form-inline">
+            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                <button type="submit" class="btn btn-secondary">Assign</button>
+                
+                <div class="btn-group" role="group">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" href="#">Dropdown link</a>
+                        <a class="dropdown-item" href="#">Dropdown link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav> -->
+    <!-- Make a form here -->
+    <div class="row m-3">
+        <div class="col-lg-8">
+            <div class="form-group">
+                <label for="title">Title</label>
+                {{ form.title|attr:"class:form-control" }}
+            </div>
+            <hr>
+            <div class="form-group">
+                <label for="description">Description</label>
+                {{ form.description|attr:"class:form-control" }}
+            </div>
+            <hr>
+            {{ form.file_field|attr:"class:choose" }}
+        </div>
+        <!-- <div class="col-1">
+            <div class="vl d-sm-none d-md-block"></div>
+        </div> -->
+        <!-- The selection stuff -->
+        <div class="col-lg-4 vl v p-3 mt-sm-2">
+            <!-- For -->
+            <hr class='d-lg-none d-sm-block'>
+            <h5>For</h5>
+            <div class="row">
+                <div class="col">
+                    {{ form.classrooms|attr:"class:form-control" }}
+                </div>
+                <!-- <div class="col">
+                    <select id="" class="form-control" name="">
+                        <option value="">Classroom1</option>
+                        <option value="">Classroom2</option>
+                        <option value="">Classroom3</option>
+                    </select>
+                </div> -->
+            </div>
+            <hr>
+            
+            <!-- Points -->
+            <h5>Points</h5>
+            <div class="row">
+                <div class="col">
+                    {{ form.points|attr:"class:form-control" }}
+                </div>
+            </div>
+            <hr>
+
+            <!-- Due -->
+            <h5>Due</h5>
+            <div class="row">
+                <div class="col">
+                    {{ form.due_date|attr:"class:form-control"|attr:"type:datetime-local" }}
+                </div>
+            </div>
+            <hr>
+            
+            <!-- Topic -->
+            <h5>Topic</h5>
+            <div class="row">
+                <div class="col">
+                    {{ form.topics|attr:"class:form-control" }}
+                </div>
+            </div>
+            <hr>
+
+        </div>
+
+    </div>
+</form>
+
+
+
+
