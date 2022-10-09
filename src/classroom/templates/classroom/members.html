@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% block title %} Home {% endblock title %}
+
+
+{% block content %}
+<div class="col-lg-8 mx-auto">
+    <!-- Teachers -->
+    <h3 class="text-primary font-weight-bold"><p style="color: rgb(208, 149, 32);">Teachers</p></h3>
+    <hr>
+
+    {% for teacher in teachers %}
+      <div class="row">
+        <img width="25px" height="25px" class="img-profile rounded-circle" src="{{ teacher.teacher.profile.image.url }}">
+        <p class="text-dark">{{ teacher.teacher.username }}</p>
+      </div>
+      <hr>
+    {% endfor %}
+
+
+
+
+    <!-- Students -->
+    <div class="row mt-4">
+      <div class="col-lg-8">
+        <h3 style="color: rgb(116, 77, 0);" class="text-primary font-weight-bold"><p style="color: rgb(208, 149, 32);">Students</p></h3>
+      </div>
+      <div class="col-lg-4 ">
+        <p class="text-primary ml-auto float-right">{{ students|length }}</p>
+      </div>
+    </div>
+    <hr>
+
+    {% for student in students %}
+      <div class="row">
+        <img width="50px" height="30px" class="img-profile rounded-circle" src="https://www.seekpng.com/png/detail/74-745868_medical-student-exam-revision-bundles-student-logo-transparent.png">
+        <p class="text-dark" style="margin-top: 8px;">{{ student.students }}</p>
+        <button  class="ml-auto btn btn-secondary"><a style="color:rgb(241, 165, 11); ;" href="{% url 'classroom:report'%}">View Report</a></button>
+      </div>
+      <hr>
+    {% endfor %}
+
+{% endblock content %}

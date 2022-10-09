@@ -1,0 +1,114 @@
+<!-- Sidebar -->
+<ul  class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a style="height: 100px;" class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'classroom:home' %}">
+      <div class="sidebar-brand-icon rotate-n-15" >
+        <img src="..\media\assets\logo.png" onerror="this.onerror=null; this.src='https://thumbs.dreamstime.com/b/print-218095534.jpg' " alt="" style="height: 80px;width:80px; border-radius: 50px; margin-left: 5px;">
+        
+       
+      </div>
+      <div class="sidebar-brand-text mx-3"> <p style="color: black;">GuruCool CLASSROOM</p> </div>
+    </a>
+
+    <!-- Divider -->
+    <hr style="background-color: black;"class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    
+
+    <!-- Divider -->
+    <hr style="background-color: black;"class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+      <h6 style="color: rgb(130, 128, 128);">Quick Access<h6>
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{% url 'classroom:home' %}">
+        <i style="color: black;" class="fas fa-fw fa-home"></i>
+        <span style="color: black;">Home</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'users:profile' %}">
+        <i style="color: black;"class="fas fa-fw fa-user-alt"></i>
+        <span style="color: black;">Profile</span></a>
+    </li>
+    <!-- Nav Item - Utilities Collapse Menu -->
+   
+
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'classroom:toreview' %}" >
+        
+         <i style="color: black;"class="fas fa-fw fa-wrench"></i>
+        <span style="color: black;">Check Assignments</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'classroom:assignment_create' %}">
+        <i style="color: black;"class="fas fa-fw fa-plus-square"></i>
+        <span style="color: black;">Create Assignment</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr style="background-color: black;"class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+      <h6 style="color: rgb(130, 128, 128);">Features</h6>
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <!-- {% if 'open' in request.path %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'classroom:classwork' classroom.pk %}" >
+          <i style="color: black;"class="fas fa-fw fa-folder"></i>
+          <span style="color: black;">Classworks</span>
+        </a>
+      </li>
+    {% endif %} -->
+
+    <!-- Nav Item - Charts -->
+    
+
+
+
+   
+
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'courses:course_list' %}">
+        <i style="color: black;"class="fas fa-fw fa-folder-open"></i>
+        <span style="color: black;">Courses</span></a>
+    </li>
+<!-- Nav Item - Tables -->
+<li class="nav-item">
+  <a class="nav-link" href="https://sphere-engine.com/">
+    <i style="color: black;"class="fas fa-fw fa-table"></i>
+    <span style="color: black;">Library</span>
+     </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'classroom:todo' %}" >
+    <i  style="color: black;"class="fas fa-fw fa-tasks"></i>
+    <span style="color: black;">Tasks & Todos</span>
+  </a>
+</li>
+   
+
+     
+
+    <!-- Divider -->
+    <hr style="background-color: black;" class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline" style="color: black;">
+      <button class="rounded-circle border-0" id="sidebarToggle" style="background-color: black;"></button>
+    </div>
+
+  </ul>
+  <!-- End of Sidebar -->
