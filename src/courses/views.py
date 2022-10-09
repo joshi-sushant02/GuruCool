@@ -1,10 +1,11 @@
+import logging
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Course, FavouriteCourse
 from .forms import CourseCreationForm, CourseUpdateForm
 
-
+@login_required
 def course_list(request):
     context = {
         'courses': Course.objects.all(),

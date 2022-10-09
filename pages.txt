@@ -1,6 +1,0 @@
-Assgnment : 
-Title
-description
-points
-duedate
-topic

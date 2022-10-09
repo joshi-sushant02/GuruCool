@@ -8,7 +8,7 @@
 <div class="row m-2">
     <div class="col-lg-8">
       <div class="row">
-        <h3 class="text-primary">{{ assignment.title }}</h3>
+        <h3  class="text-primary"><p style="color: #d04a02;">{{ assignment.title }}</p></h3>
         <div class="dropdown no-arrow ml-auto">
           <a class="btn btn-circle dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-ellipsis-v fa-sm fa-fw text-dark"></i>
@@ -127,7 +127,7 @@
             </form>
             <form action="{% url 'classroom:turnin' assignment.pk %}" method="POST">
               {% csrf_token %}
-              <button type="submit" class="btn btn-primary btn-block m-1">Mark as done</button>
+              <button style="background-color:#f5c361 ;border: transparent;" type="submit" class="btn btn-primary btn-block m-1">Mark as done</button>
             </form>
         {% endif %}
 

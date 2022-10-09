@@ -1,10 +1,11 @@
+from cmath import log
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 
-from .models import Classroom,Topic,ClassroomTeachers
+from .models import Classroom,Topic,ClassroomTeachers,ClassStudents
 from posts.models import Assignment,SubmittedAssignment,AssignmentFile, Attachment
 from .forms import ClassroomCreationForm,JoinClassroomForm, PostForm, AssignmentFileForm, AssignmentCreateForm
 from comments.forms import CommentCreateForm, PrivateCommentForm
@@ -52,6 +53,8 @@ def join_classroom(request):
             classroom = Classroom.objects.filter(classroom_code = form.cleaned_data.get('code')).first()
             if classroom:
                 request.user.classroom_set.add(classroom)
+                students=ClassStudents(classid=classroom.id,students=request.user.username)
+                students.save()
                 messages.success(request, f'You are added in {classroom.name}')
             else:
                 messages.success(request, f'Error adding you to the classroom')
@@ -93,9 +96,12 @@ def delete_classroom(requests):
 @login_required
 def members(request, pk):
     classroom = get_object_or_404(Classroom, pk=pk)
+    students=ClassStudents.objects.filter(classid=pk).values()
+    print(students)
     context = {
         'teachers': classroom.classroomteachers_set.all(),
-        'students': classroom.users.all(),
+        'students': students,
+
     }
     return render(request, 'classroom/members.html', context)
 
@@ -245,6 +251,9 @@ def student_work(request, pk):
     assignment = get_object_or_404(Assignment, pk=pk)
     context = {'assignment': assignment}
     return render(request, 'classroom/student_work.html', context)
+
+def report(request):
+    return render(request, 'classroom/report.html')
 
 
 

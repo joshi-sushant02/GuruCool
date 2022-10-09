@@ -1,11 +1,12 @@
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul  class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'classroom:home' %}">
+    <a style="height: 100px;" class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'classroom:home' %}">
       <div class="sidebar-brand-icon rotate-n-15" >
-        <i style="color: black;"class="fas fa-book-open">
-          </i>
+        <img src="..\media\assets\logo.png" onerror="this.onerror=null; this.src='https://thumbs.dreamstime.com/b/print-218095534.jpg' " alt="" style="height: 80px;width:80px; border-radius: 50px; margin-left: 5px;">
+        
+       
       </div>
       <div class="sidebar-brand-text mx-3"> <p style="color: black;">GuruCool CLASSROOM</p> </div>
     </a>
@@ -14,11 +15,7 @@
     <hr style="background-color: black;"class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'users:profile' %}">
-        <i style="color: black;"class="fas fa-fw fa-user-alt"></i>
-        <span style="color: black;">Profile</span></a>
-    </li>
+    
 
     <!-- Divider -->
     <hr style="background-color: black;"class="sidebar-divider">
@@ -35,14 +32,13 @@
         <span style="color: black;">Home</span>
       </a>
     </li>
-
-    <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'classroom:todo' %}" >
-        <i  style="color: black;"class="fas fa-fw fa-tasks"></i>
-        <span style="color: black;">Tasks & Todos</span>
-      </a>
+      <a class="nav-link" href="{% url 'users:profile' %}">
+        <i style="color: black;"class="fas fa-fw fa-user-alt"></i>
+        <span style="color: black;">Profile</span></a>
     </li>
+    <!-- Nav Item - Utilities Collapse Menu -->
+   
 
     <li class="nav-item">
       <a class="nav-link" href="{% url 'classroom:toreview' %}" >
@@ -67,14 +63,14 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    {% if 'open' in request.path %}
+    <!-- {% if 'open' in request.path %}
       <li class="nav-item">
         <a class="nav-link" href="{% url 'classroom:classwork' classroom.pk %}" >
           <i style="color: black;"class="fas fa-fw fa-folder"></i>
           <span style="color: black;">Classworks</span>
         </a>
       </li>
-    {% endif %}
+    {% endif %} -->
 
     <!-- Nav Item - Charts -->
     
@@ -89,26 +85,22 @@
         <i style="color: black;"class="fas fa-fw fa-folder-open"></i>
         <span style="color: black;">Courses</span></a>
     </li>
+<!-- Nav Item - Tables -->
+<li class="nav-item">
+  <a class="nav-link" href="https://sphere-engine.com/">
+    <i style="color: black;"class="fas fa-fw fa-table"></i>
+    <span style="color: black;">Library</span>
+     </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'classroom:todo' %}" >
+    <i  style="color: black;"class="fas fa-fw fa-tasks"></i>
+    <span style="color: black;">Tasks & Todos</span>
+  </a>
+</li>
+   
 
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-      <!-- <a class="nav-link" href="{% url 'ide:ide' %}"> -->
-      <a class="nav-link" href="https://sphere-engine.com/" target="_blank">
-        <i style="color: black;" class="fas fa-fw fa-code"></i>
-        <span style="color: black;">Code Studio  <img style="width: 32px; height:32px; ;" src="https://cdn.iconscout.com/icon/free/png-256/premium-1891094-1598007.png" alt="">
-        </span> 
-       </a>
-    </li>
-
-     <!-- Nav Item - Tables -->
-     <li class="nav-item">
-      <!-- <a class="nav-link" href="{% url 'ide:problems' %}"> -->
-      <a class="nav-link" href="https://sphere-engine.com/" target="_blank">
-        <i style="color: black;"class="fas fa-fw fa-table"></i>
-        <span style="color: black;">Solve Problems</span>
-        <img style="width: 32px; height:32px ;  animation: alternate-reverse;" src="https://cdn.iconscout.com/icon/free/png-256/premium-1891094-1598007.png" alt="">
-      </a>
-    </li>
+     
 
     <!-- Divider -->
     <hr style="background-color: black;" class="sidebar-divider d-none d-md-block">

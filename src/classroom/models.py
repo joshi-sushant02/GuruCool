@@ -1,8 +1,7 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-
-
 # members are not teachers
 class Classroom(models.Model):
     name = models.CharField(max_length=200)
@@ -26,6 +25,18 @@ class ClassroomTeachers(models.Model):
         return f'{self.teacher.username} -> {self.classroom.name}'
 
 
+class ClassStudents(models.Model):
+    classid = models.IntegerField(default=0)
+    students = models.TextField(default="user")
+
+    
+
+
+
+
+
+
+    
 class Topic(models.Model):
     name = models.CharField(max_length=200)
     classroom = models.ForeignKey(Classroom,on_delete = models.CASCADE)

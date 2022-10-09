@@ -15,7 +15,7 @@
 
 body {
   align-items: center;
-  background: #96d8d0;
+  background: #f2dc5e;
   color: rgba(0, 0, 0, 0.8);
   display: grid;
   font-family: "Montserrat", sans-serif;
@@ -33,8 +33,8 @@ body {
 }
 
 .left-container {
-  background: #717f82;
-  overflow: hidden;
+  background:  #ffd001;;
+  /* overflow: hidden; */
   padding: 40px 0 0 0;
   position: relative;
   text-align: center;
@@ -46,12 +46,12 @@ body {
   font-size: 24px;
 }
 .left-container h1 i {
-  background: #abf7df;
+  background: #f6f7ab;
   border-radius: 50%;
   color: #807182;
   font-size: 24px;
   margin-right: 5px;
-  padding: 10px;
+  /* padding: 10px; */
   transform: rotate(-45deg);
 }
 .left-container .puppy {
@@ -69,13 +69,10 @@ body {
   width: 100%;
   z-index: 1;
 }
-.left-container img {
-  filter: sepia(100%);
-  width: 70%;
-}
+
 
 .right-container {
-  background: #c2f9ee;
+  background: #f8faae;
   display: grid;
   grid-template-areas: "." ".";
   width: 500px;
@@ -129,11 +126,11 @@ body {
   width: 100%;
 }
 .left-container footer {
-  margin-top: 400px;
+  padding: 20px;
   align-items: center;
-  background: #fff;
+  background: #ffd001;
   display: grid;
-  padding: 5px 40px;
+  /* padding: 5px 40px; */
 }
 .left-container footer button {
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -192,11 +189,11 @@ body {
 }
 
 .radio-container input[type=radio]:checked + label {
-  background: #abf7e2;
+  background: #f7f3ab;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 .radio-container input[type=file]{
-  background: #abf7e2;
+  background: #f7f2ab;
   width: auto;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -213,15 +210,14 @@ body {
             <h4 style="font-weight: bold">{{ request.user.username }}</h4>
         
     </div>
-        <hr style="background-color: black;"class="sidebar-divider">
-
+<img style="height:400px ;width:100%; margin-top: 12px;" src="https://img.freepik.com/premium-psd/3d-illustration-student-back-school-study-sky_611602-430.jpg?w=2000" alt="">
      <footer>
           <div class='set'>
            <button id="back"><a href="{% url 'classroom:home' %}">Back</a></button>
             <button id='next' type="submit">Done!</button>
           </div>
         </footer>  
-    </div>
+         </div>
       
       <div class='right-container'>
         <header>

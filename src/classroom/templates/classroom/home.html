@@ -5,6 +5,31 @@
 
 {% block content %}
 <!-- Page Heading -->
+
+<!-- <script>
+                            
+    img= document.getElementById("{{classroom.name}}")
+    img.innerHTML='<img id="img" class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">'
+    source= "https://api.unsplash.com/search/photos/?page=1&query=office&client_id=HngHfDETr9YdDA8cxUqkdg2-WgSvATj5SOqTIgLX1VU"
+    console.log(source);
+
+    window.addEventListener('load', loadImg);
+
+function loadImg() {
+const url = "https://api.unsplash.com/search/photos/?page=1&query="+"{{classroom.name}}"+"&client_id=HngHfDETr9YdDA8cxUqkdg2-WgSvATj5SOqTIgLX1VU";
+//   const imageDiv = document.querySelector('.image');
+fetch(url)
+.then(response => {
+return response.json();
+})
+.then(data => {
+img= document.getElementById("{{classroom.name}}")
+img.innerHTML='<img id="img" class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem; border-radius:10px" src='+data.results[1].urls.thumb+' alt="">'
+
+});
+}
+
+ </script> -->
 <h1 class="h3 mb-4 text-gray-800">Subjects</h1>
 <!-- ROW  -->
 <div class="row">
@@ -13,16 +38,20 @@
     <div class="col-lg-3 col-md-4 col-sm-1">
         <!-- CARD -->
         <div class="card border-bottom-primary shadow mb-4">
-            <div class="card-header py-3">
+            <div  class="card-header py-3">
                 <a href="{% url 'classroom:open_classroom' classroom.id %}">
-                    <h6 class="m-0 font-weight-bold text-primary">{{ classroom.name }}</h6>
+                    <h6 class="m-0 font-weight-bold text-primary"> <p style="color: #febd9a;">{{ classroom.name }}</p></h6>
                 </a>
             </div>
             
-                <div class="card-body">
-                    <div class="text-center">
-                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="https://img.freepik.com/premium-vector/3d-books-icon-web-design-isolated-education-online-class-concept-eps-10-vector_112554-795.jpg?w=2000" alt="">
-                    </div>
+                <div  class="card-body">
+                    <div  id="{{classroom.name}}" class="text-center">
+                       
+                    <!-- <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="https://img.freepik.com/premium-vector/3d-books-icon-web-design-isolated-education-online-class-concept-eps-10-vector_112554-795.jpg?w=2000" alt=""> -->
+                    <img id="img" class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width:1000px; height: 120px;" src="https://image.shutterstock.com/image-illustration/pastel-work-desk-table-laptop-260nw-1376634059.jpg" alt="">
+                    
+                         
+                </div>
                     <p class="text-secondary">{{ classroom.description }}</p>
                 </div>
             
@@ -59,7 +88,7 @@
             
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Create Classroom</button>
+                    <button style="background-color:#f5c361 ; border:transparent" type="submit" class="btn btn-primary">Create Classroom</button>
                 </div>
             </form>
         </div>
@@ -90,7 +119,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Join Classroom</button>
+                        <button style="background-color: #f5c361; border:transparent" type="submit" class="btn btn-primary">Join Classroom</button>
                     </div>
             </form>
         </div>
