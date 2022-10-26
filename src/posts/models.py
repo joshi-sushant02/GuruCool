@@ -1,4 +1,6 @@
-import os 
+from email.policy import default
+import os
+from xmlrpc.client import DateTime 
 
 from django.db import models
 from django.contrib.auth.models import User 
@@ -81,6 +83,7 @@ class SubmittedAssignment(models.Model):
     assignment = models.ForeignKey(Assignment, on_delete = models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     turned_in = models.BooleanField(default = False)
+    turned_in_date =  models.DateTimeField(default=timezone.now)
     grade = models.IntegerField(default=0)
     is_reviewed = models.BooleanField(default=False)
     

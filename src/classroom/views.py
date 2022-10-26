@@ -97,10 +97,10 @@ def delete_classroom(requests):
 def members(request, pk):
     classroom = get_object_or_404(Classroom, pk=pk)
     students=ClassStudents.objects.filter(classid=pk).values()
-    print(students)
     context = {
         'teachers': classroom.classroomteachers_set.all(),
         'students': students,
+        'classid':classroom.id
 
     }
     return render(request, 'classroom/members.html', context)
@@ -252,8 +252,73 @@ def student_work(request, pk):
     context = {'assignment': assignment}
     return render(request, 'classroom/student_work.html', context)
 
-def report(request):
-    return render(request, 'classroom/report.html')
+def report(request,pk,name):
+    user = get_object_or_404(User,username=name)
+    print(user)
+    # classrooms = request.user.classroom_set.all()
+    # topics = []
+    # for classroom in classrooms:
+    #     topics.extend(list(classroom.topic_set.all()))
+    # assignments = []
+    # for topic in topics:
+    #     assignments.extend(list(topic.assignment_set.all()))
+    # filtered_assignment = []
+    # for assignment in assignments:
+    #     if not assignment.is_turnedin(request.user):
+    #         filtered_assignment.append(assignment)
+    # context = {'assignments':filtered_assignment}
+
+
+    classroom = get_object_or_404(Classroom,pk=pk)
+    assignments = []
+    for topic in classroom.topic_set.all():
+        assignments.extend(list(topic.assignment_set.all()))
+    filtered_assignment = []    
+    for assignment in assignments:
+        if assignment.is_turnedin(user):
+            filtered_assignment.append(assignment)
+    print(filtered_assignment)  
+    notsubmitted=len(assignments) - len(filtered_assignment)
+
+    checked_assignments=[]
+    for checked in filtered_assignment:
+        assignment= get_object_or_404(SubmittedAssignment,assignment=checked) 
+        if assignment.is_reviewed:
+            checked_assignments.append(assignment)
+    after_due=[]
+    before_due=[]
+    for assign in filtered_assignment:
+        assignment=get_object_or_404(SubmittedAssignment,assignment=assign) 
+        if assignment.turned_in_date> assign.due_date:
+            after_due.append(assignment)
+            print("i m here")      
+        else:
+            before_due.append(assignment)
+            print("im else")    
+    sucess=0
+    degree=0        
+    if(len(assignments)!=0):       
+     sucess= len(filtered_assignment) / float( len(assignments)  ) *100
+     degree=180*len(filtered_assignment) / float( len(assignments)  )
+    
+    context = {
+        'assignments':assignments,
+        'submitted':filtered_assignment,
+        'not_submitted': notsubmitted,
+        'checked':checked_assignments[0:4],
+        'sucess':sucess,
+        'degree':degree,
+        'after':after_due,
+        'before':before_due
+        }
+
+    return render(request, 'classroom/report.html',context)
+
+
+
+
+def library(request):
+    return render(request, 'index.html')
 
 
 

@@ -37,7 +37,7 @@
       <div class="row">
         <img width="50px" height="30px" class="img-profile rounded-circle" src="https://www.seekpng.com/png/detail/74-745868_medical-student-exam-revision-bundles-student-logo-transparent.png">
         <p class="text-dark" style="margin-top: 8px;">{{ student.students }}</p>
-        <button  class="ml-auto btn btn-secondary"><a style="color:rgb(241, 165, 11); ;" href="{% url 'classroom:report'%}">View Report</a></button>
+        <button  class="ml-auto btn btn-secondary"><a style="color:rgb(241, 165, 11); ;" href="{% url 'classroom:report' classid student.students%}">View Report</a></button>
       </div>
       <hr>
     {% endfor %}
