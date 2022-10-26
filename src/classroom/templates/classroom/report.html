@@ -358,7 +358,7 @@ padding: 0px 6px;
 .circle-wrap .circle .mask.full,
 .circle-wrap .circle .fill {
   animation: fill ease-in-out 3s;
-  transform: rotate(126deg);
+  transform: rotate(180deg);
 }
 
 @keyframes fill {
@@ -366,7 +366,7 @@ padding: 0px 6px;
     transform: rotate(0deg);
   }
   100% {
-    transform: rotate(126deg);
+    transform: rotate(180deg);
   }
 }
 .circle-wrap .inside-circle {
@@ -416,26 +416,26 @@ padding: 0px 6px;
 	
 	<div class="col-div-4-1">
 		<div class="box">
-			<p class="head-1">Total Submissions</p>
-			<p class="number">30</p>
-			<p class="percent"><i class="fa fa-long-arrow-up" aria-hidden="true"></i> 10 submissions <span>Since Last Months</span></p>
+			<p class="head-1">Total Assignments</p>
+			<p class="number">{{ assignments|length }}</p>
+			<p class="percent"><i class="fa fa-long-arrow-up" aria-hidden="true"></i> {{ assignments|length }} posted by teacher <span>Since Last Months</span></p>
       <i class="fa fa-cubes box-icon"></i>
 			
 		</div>
 	</div>
   <div class="col-div-4-1">
     <div class="box">
-      <p class="head-1">Before Due</p>
-      <p class="number">21</p>
-      <p class="percent"><i class="fa fa-long-arrow-up" aria-hidden="true"></i> 8 <span>In Last Months</span></p>
+      <p class="head-1">Submitted Before Due</p>
+      <p class="number">{{ before|length }}</p>
+      <p class="percent"><i style="color: green;" class="fa fa-long-arrow-up" aria-hidden="true"></i> {{ before|length  }} submissions <span>In Last Months</span></p>
       <i class="fa fa-hourglass-start box-icon"></i>
     </div>
   </div>
 	<div class="col-div-4-1">
 		<div class="box">
-			<p class="head-1">After Due</p>
-			<p class="number">9</p>
-			<p class="percent" style="color:red!important"><i class="fa fa-long-arrow-down" aria-hidden="true"></i> 2 <span>In Last Months</span></p>
+			<p class="head-1">Submitted After Due</p>
+			<p class="number">{{after|length}}</p>
+			<p class="percent" style="color:red!important"><i class="fa fa-long-arrow-down" aria-hidden="true"></i> {{after|length}} <span>In Last Months</span></p>
 			<i class="fa fa-hourglass-end box-icon"></i>
 		</div>
 	</div>
@@ -447,27 +447,14 @@ padding: 0px 6px;
 	<div class="col-div-4-1">
 		<div class="box-1">
 			<div class="content-box-1">
-			<p class="head-1">Recent Assignments</p>
+        <div class="m-box active1"><p class="head-1">Recent Assignments</p></div>
 			<br/>
-			<div class="m-box active1">
-				<p>Linear Regression<br/><span class="no-1">Assignment-7</span></p>
-				<span class="no">10/10</span>
-			</div>
-
+      {%for assignment in checked%}
 			<div class="m-box">
-				<p>Multiple Regression<br/><span class="no-1">Assignment-6</span></p>
-				<span class="no">15/20</span>
+				<p style="text-transform: uppercase;">{{assignment.assignment.title}}<br/><span style="text-transform: lowercase;"  class="no-1">{{assignment.assignment.topic}}</span></p>
+				<span class="no">{{assignment.grade}}/{{assignment.assignment.marks}}</span>
 			</div>
-
-			<div class="m-box">
-				<p>DataSets & Faraway<br/><span class="no-1">Assignment-5</span></p>
-				<span class="no">10/10</span>
-			</div>
-
-			<div class="m-box">
-				<p>Basic of R<br/><span class="no-1">Assignment-4</span></p>
-				<span class="no">20/20</span>
-			</div>
+{%endfor%}
 			
 		</div>
 	</div>
@@ -478,15 +465,65 @@ padding: 0px 6px;
 			<p class="head-1">Overview <span>View All</span></p>
 
 			<div class="circle-wrap">
+
+
+        <div class="circle">
+          <div class="mask full">
+            <div class="fill" ></div>
+          </div>
+          <div class="mask half">
+            <div class="fill"></div>
+          </div>
+          
+          <div class="inside-circle"> {{sucess}}% </div>
+        </div>   
+    <!-- {%if sucess > 75 %}
     <div class="circle">
       <div class="mask full">
-        <div class="fill"></div>
+        <div style="animation: fill ease-in-out 3s;
+        transform: rotate(180deg);" class="fill" ></div>
       </div>
       <div class="mask half">
         <div class="fill"></div>
       </div>
-      <div class="inside-circle"> 70% </div>
+      
+      <div class="inside-circle"> {{sucess}}% </div>
     </div>
+    {%endif%}
+
+
+    {%if sucess < 75%}
+    <div class="circle">
+      <div class="mask full">
+        <div style="animation: fill ease-in-out 3s;
+        transform: rotate(120deg);" class="fill" ></div>
+      </div>
+      <div class="mask half">
+        <div class="fill"></div>
+      </div>
+      
+      <div class="inside-circle"> {{sucess}}% </div>
+    </div>
+    {%endif%}
+
+
+    {%if sucess < 50 %}
+  
+    <div class="circle">
+      <div class="mask full">
+        <div style="animation: fill ease-in-out 3s;
+        transform: rotate(80deg);" class="fill" ></div>
+      </div>
+      <div class="mask half">
+        <div class="fill"></div>
+      </div>
+      
+      <div class="inside-circle"> {{sucess}}% </div>
+    </div>
+
+
+{%endif%} -->
+
   </div>
 		</div>
 		</div>
@@ -496,12 +533,15 @@ padding: 0px 6px;
 			<div class="content-box-1">
 			<p class="head-1">Acitivity <span>View All</span></p>
 			<br/>
-			<p class="act-p"><i class="fa fa-circle" ></i> Assignment-7 was submitted sucessfully before     DUE on
-         20th September</p>
-			<p class="act-p"><i class="fa fa-circle" style="color:red!important;"></i> Assignment-6 was submitted after DUE on 10th     Oct  </p>
-			<p class="act-p"><i class="fa fa-circle" style="color:green!important;"></i> Assignment-5 was submitted sucessfully before DUE and is graded. </p>
-			<p class="act-p"><i class="fa fa-circle" ></i> Assignment-4 was submitted sucessfully before DUE on 2 Oct </p>
-			
+      {%for assignments in after%}
+			<p class="act-p"><i class="fa fa-circle" style="color:red!important;"></i><span style="text-transform: uppercase;"> {{assignments.assignment.title}}</span> was submitted after DUE on {{assignments.turned_in_date}}</p>
+      {%endfor%}
+      {%for assignments in before%}
+			<p class="act-p"><i class="fa fa-circle" style="color:green!important;"></i><span style="text-transform: uppercase;"> {{assignments.assignment.title}}</span> was submitted sucessfully before DUE on {{assignments.turned_in_date}} </p>
+      {%endfor%}
+      {%for assignments in checked|slice:"1" %}
+			<p class="act-p"><i class="fa fa-circle" ></i> <span style="text-transform: uppercase;"> {{assignments.assignment.title}}</span> was graded by you </p>
+			{%endfor%}
 		</div>
 	</div>
 	</div>
