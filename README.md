@@ -21,6 +21,7 @@ This is an attempt to clone the best features of google classroom using django.
 
 ## Screenshots
 
+
 ## Contributors 
 <a href="https://github.com/joshi-sushant02">Sushant Joshi</a><br>
 
